@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 import pandas as pd
 from datetime import datetime
 
@@ -16,7 +17,7 @@ dias_en = {k: k for k in dias_es}
 meses_en = {k: k for k in meses_es}
 
 def detect_language(listing):
-    if any(word in listing.lower() for word in ['cottage', 'penthouse', 'studio']):
+    if any(word in listing.lower() for word in ['cottage', 'studio']):
         return 'en'
     return 'es'
 
@@ -29,7 +30,7 @@ def generate_message(df):
         header = "🌟 **Upcoming Cleaning Schedule** 🌟" if lang == 'en' else "🌟 **Planificación de las próximas limpiezas** 🌟"
         early = "after **11:00 AM**" if lang == 'en' else "después de las **11.00 horas**"
         late = "after **2:30 PM**" if lang == 'en' else "después de las **14.30 horas**"
-        same = "(same-day check-in) 🔴" if lang == 'en' else "(check-in el mismo día) 🔴"
+        same = "(same-day start date) 🔴" if lang == 'en' else "(start date el mismo día) 🔴"
         next_guest = "(next guest {d} days later)" if lang == 'en' else "(siguiente huésped {d} días después)"
         end = "(end of stays)" if lang == 'en' else "(fin de estancia)"
 
@@ -54,22 +55,40 @@ def generate_message(df):
         output += f"\n🏠 *{listing}*\n\n{mensaje}\n"
     return output
 
-# Streamlit app UI
-st.set_page_config(page_title="Limpiezas Generator", page_icon="🧼")
+from PIL import Image
+import streamlit as st
+
 st.title("🧼 Limpiezas Generator")
 st.markdown("Upload your Airbnb **reservation CSV**, and get a WhatsApp-ready cleaning message!")
 
+# 📋 How to Use
+st.markdown("""
+## 📋 How to Use
+
+1. Go to 👉 [Airbnb Reservations](https://www.airbnb.com/hosting/reservations)  
+2. Click **Export > Download CSV file**  
+3. Upload the file to the app  
+""")
+
+# Show image (image.png must be in the same folder and committed to GitHub)
+image = Image.open("image.png")
+st.image(image, caption="Example Airbnb CSV export", use_column_width=True,)
+
+# Upload CSV
 uploaded_file = st.file_uploader("📥 Upload your reservation CSV", type=["csv"])
+st.markdown("""
+4. Copy the generated message and share it via WhatsApp!
+""")
 
 if uploaded_file:
     try:
         df = pd.read_csv(uploaded_file)
         df.columns = [c.strip().lower() for c in df.columns]
-        if not all(col in df.columns for col in ["check-in", "checkout", "listing"]):
-            st.error("⚠️ Your CSV must include: check-in, checkout, listing")
+        if not all(col in df.columns for col in ["start date", "end date", "listing"]):
+            st.error("⚠️ Your CSV must include: start date, end date, listing")
         else:
-            df["start"] = pd.to_datetime(df["check-in"])
-            df["end"] = pd.to_datetime(df["checkout"])
+            df["start"] = pd.to_datetime(df["start date"])
+            df["end"] = pd.to_datetime(df["end date"])
             df["listing"] = df["listing"].astype(str)
             message = generate_message(df)
             st.success("✅ Message ready!")
