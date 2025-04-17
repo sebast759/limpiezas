@@ -58,7 +58,7 @@ def generate_message(df):
 from PIL import Image
 import streamlit as st
 
-st.title("🧼 Limpiezas Generator")
+st.title("🧼 Limpiezas Message Generator")
 st.markdown("Upload your Airbnb **reservation CSV**, and get a WhatsApp-ready cleaning message!")
 
 # 📋 How to Use
@@ -77,8 +77,8 @@ st.image(image, caption="Example Airbnb CSV export", use_column_width=True,width
 # Upload CSV
 uploaded_file = st.file_uploader("📥 Upload your reservation CSV", type=["csv"])
 st.markdown("""
-4. Copy the generated message and share it via WhatsApp!
-""")
+4. **Copy the generated message and share it via <img src="https://img.icons8.com/color/48/000000/whatsapp.png" width="24" style="vertical-align: middle;"> WhatsApp!**
+""", unsafe_allow_html=True)
 
 if uploaded_file:
     try:
