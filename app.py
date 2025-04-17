@@ -72,7 +72,7 @@ st.markdown("""
 
 # Show image (image.png must be in the same folder and committed to GitHub)
 image = Image.open("image.png")
-st.image(image, caption="Example Airbnb CSV export", use_column_width=True,)
+st.image(image, caption="Example Airbnb CSV export", use_column_width=True,width=50)
 
 # Upload CSV
 uploaded_file = st.file_uploader("📥 Upload your reservation CSV", type=["csv"])
