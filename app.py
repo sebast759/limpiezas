@@ -76,3 +76,4 @@ if uploaded_file:
             st.code(message, language="markdown")
     except Exception as e:
         st.error(f"❌ Error reading file: {e}")
+
