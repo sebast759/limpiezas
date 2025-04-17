@@ -62,17 +62,19 @@ st.title("🧼 Limpiezas Message Generator")
 st.markdown("Upload your Airbnb **reservation CSV**, and get a WhatsApp-ready cleaning message!")
 
 # 📋 How to Use
-st.markdown("""
-## 📋 How to Use
+st.markdown("## 📋 How to Use")
 
-1. Go to 👉 [Airbnb Reservations](https://www.airbnb.com/hosting/reservations)  
-2. Click **Export > Download CSV file**  
-3. Upload the file to the app  
-""")
+left, right = st.columns([1, 1.5])  # Wider left side for text
+    
+with left:
+    st.markdown("""
+    1. Go to 👉 [Airbnb Reservations](https://www.airbnb.com/hosting/reservations)  
+    2. Click **Export > Download CSV file**  
+    3. Upload the file to the app  
+    """)
 
-# Show image (image.png must be in the same folder and committed to GitHub)
-image = Image.open("image.png")
-st.image(image, caption="Example Airbnb CSV export", use_column_width=True,width=50)
+with right:
+    st.image("image.png", caption="Example CSV download", width=500)
 
 # Upload CSV
 uploaded_file = st.file_uploader("📥 Upload your reservation CSV", type=["csv"])
