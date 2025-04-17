@@ -1,0 +1,4 @@
+echo .ipynb_checkpoints/ > .gitignore
+echo build/ >> .gitignore
+echo *.csv >> .gitignore
+echo *.bat >> .gitignore
