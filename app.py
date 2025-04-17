@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-# Language helpers
+# Translations
 dias_es = {
     "Monday": "Lunes", "Tuesday": "Martes", "Wednesday": "Miércoles", "Thursday": "Jueves",
     "Friday": "Viernes", "Saturday": "Sábado", "Sunday": "Domingo"
@@ -54,7 +54,7 @@ def generate_message(df):
         output += f"\n🏠 *{listing}*\n\n{mensaje}\n"
     return output
 
-# Streamlit interface
+# Streamlit app UI
 st.set_page_config(page_title="Limpiezas Generator", page_icon="🧼")
 st.title("🧼 Limpiezas Generator")
 st.markdown("Upload your Airbnb **reservation CSV**, and get a WhatsApp-ready cleaning message!")
