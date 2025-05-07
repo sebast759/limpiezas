@@ -29,7 +29,7 @@ def generate_message(df):
         meses = meses_en if lang == 'en' else meses_es
         header = "🌟 **Upcoming Cleaning Schedule** 🌟" if lang == 'en' else "🌟 **Planificación de las próximas limpiezas** 🌟"
         early = "after **11:00 AM**" if lang == 'en' else "después de las **11.00 horas**"
-        late = "after **2:30 PM**" if lang == 'en' else "después de las **14.30 horas**"
+        late = "after **11:00 AM**" if lang == 'en' else "después de las **14.30 horas**"
         same = "(same-day checkin) 🔴" if lang == 'en' else "(checkin el mismo día) 🔴"
         next_guest = "(next guest {d} days later)" if lang == 'en' else "(siguiente huésped {d} días después)"
         end = "(end of stays)" if lang == 'en' else "(fin de estancia)"
