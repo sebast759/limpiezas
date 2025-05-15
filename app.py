@@ -40,7 +40,7 @@ def generate_message(df):
             out_date = group.loc[i, "end"]
             dia = dias[out_date.strftime("%A")]
             mes = meses[out_date.strftime("%B")]
-            fecha = f"{dia} {out_date.day} de {mes}"
+            fecha = f"{dia} {out_date.day} {mes}"
 
             same_day = (i + 1 < len(group)) and (group.loc[i + 1, "start"].date() == out_date.date())
             if same_day:
